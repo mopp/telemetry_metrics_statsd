@@ -633,7 +633,7 @@ defmodule TelemetryMetricsStatsdTest do
       assert udp.host == {127, 0, 0, 1}
 
       with_mock :inet, [:passthrough, :unstick],
-        gethostbyname: fn _ -> {:ok, {:hostent, 'localhost', [], :inet, 4, [{10, 0, 0, 0}]}} end do
+        gethostbyname: fn _ -> {:ok, {:hostent, ~c"localhost", [], :inet, 4, [{10, 0, 0, 0}]}} end do
         assert_raise Liveness, fn ->
           eventually(fn ->
             {:ok, udp} = TelemetryMetricsStatsd.get_udp(pool_id)
@@ -658,7 +658,7 @@ defmodule TelemetryMetricsStatsdTest do
       assert udp.host == {127, 0, 0, 1}
 
       with_mock :inet, [:passthrough, :unstick],
-        gethostbyname: fn _ -> {:ok, {:hostent, 'localhost', [], :inet, 4, [{10, 0, 0, 0}]}} end do
+        gethostbyname: fn _ -> {:ok, {:hostent, ~c"localhost", [], :inet, 4, [{10, 0, 0, 0}]}} end do
         eventually(fn ->
           {:ok, udp} = TelemetryMetricsStatsd.get_udp(pool_id)
           assert udp.host == {10, 0, 0, 0}
