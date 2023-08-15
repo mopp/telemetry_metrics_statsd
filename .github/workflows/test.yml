@@ -34,6 +34,7 @@ jobs:
     name: Test on Elixir ${{ matrix.elixir }} (OTP ${{ matrix.otp }})
     runs-on: ubuntu-20.04
     strategy:
+      fail-fast: false
       matrix:
         include:
           - otp: 22.3
@@ -44,6 +45,8 @@ jobs:
             elixir: 1.13.0
           - otp: 25.1
             elixir: 1.14.0
+          - otp: 25.1
+            elixir: 1.15.4
           - otp: 26.0
             elixir: 1.15.4
     steps:
